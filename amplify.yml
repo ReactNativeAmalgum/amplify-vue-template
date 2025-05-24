@@ -7,9 +7,14 @@ backend:
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
+    preBuild:
+      commands:
+        - nvm install 20         # Install Node.js v20
+        - nvm use 20             # Switch to Node.js v20
+        - npm install            # Ensure dependencies are installed
     build:
       commands:
-        - npm run build
+        - npm run build          # Run the build command
   artifacts:
     baseDirectory: dist
     files:
